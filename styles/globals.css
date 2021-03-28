@@ -19,6 +19,25 @@
   src: url('/fonts/Inter-italic.var.woff2') format('woff2');
 }
 
+.notion-quote {
+  padding: 0.2em 0.9em;
+  font-size: 1em;
+}
+
+.notion-list li {
+  padding: 0;
+  white-space: pre-wrap;
+}
+
+.notion-hr {
+  border-width: 1px;
+  border-color: rgb(228, 227, 226);
+}
+
+article {
+  margin-bottom: 200px;
+}
+
 html {
   --scrollbarBG: #ffffff00;
   --thumbBG: #b8b8b8;

@@ -22,7 +22,8 @@ const Footer = ({ fullWidth }) => {
           is built with ♥ and ⚛ Next.js. Proudly deployed on ▲Vercel.
         </p>
         <p>
-          © {BLOG.author} {from === y || !from ? y : `${from} - ${y}`}
+          © {BLOG.author}{' '}{from === y || !from ? y : `${from} - ${y}`}
+          &nbsp;<a href="https://beian.miit.gov.cn/">桂ICP备18011166号-1</a>
         </p>
       </div>
     </div>

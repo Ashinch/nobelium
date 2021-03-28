@@ -15,10 +15,6 @@ const GitalkComponent = dynamic(
   { ssr: false }
 )
 
-const mapPageUrl = id => {
-  return 'https://www.notion.so/' + id.replace(/-/g, '')
-}
-
 const DefaultLayout = ({ children, blockMap, frontMatter }) => {
   const locale = useLocale()
   const router = useRouter()
@@ -31,27 +27,26 @@ const DefaultLayout = ({ children, blockMap, frontMatter }) => {
       type="article"
     >
       <article>
+        {frontMatter.parent && (
+          <a className="font-sans font-bold font-medium dark:text-gray-400"
+             style={{fontSize: 16, marginBottom: 5, color: '#666666'}}
+             href={frontMatter.parent.slug}
+          >
+            {'← ' + frontMatter.parent.title}
+          </a>
+        )}
         <h1 className="font-sans font-bold text-3xl text-black dark:text-white">
           {frontMatter.title}
         </h1>
         {frontMatter.type !== 'Page' && (
-          <nav className="flex mt-7 mb-2 items-center text-gray-500 dark:text-gray-400">
-            <div className="flex">
-              <a href={BLOG.socialLink || '#'} className="flex">
-                <Image
-                  alt={BLOG.author}
-                  width={24}
-                  height={24}
-                  src="/avatar.svg"
-                  className="rounded-full"
-                />
-                <p className="hidden md:ml-2 md:block">{BLOG.author}</p>
-              </a>
-              <span className="hidden md:inline">&nbsp;/&nbsp;</span>
-            </div>
-            <div className="mx-2 md:ml-0">
-              {formatDate(frontMatter.date, BLOG.lang)}
-            </div>
+          <nav className="flex mt-4 mb-1 items-center font-medium text-gray-600 dark:text-gray-400"
+               style={{flexDirection: 'column', alignItems: 'flex-start', fontSize: 16}}>
+            {console.log('frontMatter', frontMatter)}
+            {frontMatter.date && (
+              <div className="mx-2 md:ml-0">
+                {formatDate(frontMatter.date, BLOG.lang)}
+              </div>
+            )}
             {frontMatter.tags && (
               <div className="flex flex-wrap">
                 {frontMatter.tags.map(tag => (
@@ -67,6 +62,18 @@ const DefaultLayout = ({ children, blockMap, frontMatter }) => {
                 ))}
               </div>
             )}
+            {frontMatter.attribute && (
+              <div style={{display: 'flex'}}>
+                <div className="mx-2 md:ml-0">
+                  {frontMatter.attribute}
+                </div>
+                {frontMatter.source && (
+                  <div className="mx-2 md:ml-0">
+                    <a href={frontMatter.source} target="_blank">{frontMatter.source}</a>
+                  </div>
+                )}
+              </div>
+            )}
           </nav>
         )}
         {children}
@@ -79,7 +86,6 @@ const DefaultLayout = ({ children, blockMap, frontMatter }) => {
                 code: Code,
                 collectionRow: CollectionRow
               }}
-              mapPageUrl={mapPageUrl}
             />
           </div>
         )}

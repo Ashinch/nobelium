@@ -1,6 +1,6 @@
 import DefaultLayout from '@/layouts/default'
 import FullWidthLayout from '@/layouts/fullwidth'
-import { getAllPosts, getPostBlocks } from '@/lib/notion'
+import { getAllPosts, getSubPost, getPostBlocks } from '@/lib/notion'
 import BLOG from '@/blog.config'
 
 const BlogPost = ({ post, blockMap }) => {
@@ -20,6 +20,7 @@ const BlogPost = ({ post, blockMap }) => {
           @apply font-sans;
           @apply p-0;
           @apply my-3;
+          line-height: 1.5rem;
         }
         :global(.notion-page-link) {
           color: inherit;
@@ -82,9 +83,13 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params: { slug } }) {
+  console.log('getStaticProps', slug)
   let posts = await getAllPosts()
   posts = posts.filter(post => post.status === 'Published')
-  const post = posts.find(t => t.slug === slug)
+  let post = posts.find(t => t.slug === slug)
+  if (post === undefined) {
+    post = await getSubPost(slug)
+  }
   const blockMap = await getPostBlocks(post.id)
   return {
     props: { post, blockMap },

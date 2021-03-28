@@ -4,6 +4,7 @@ import BLOG from '@/blog.config'
 import Head from 'next/head'
 import PropTypes from 'prop-types'
 import BlogPost from './BlogPost'
+import Analytics from '@/components/Analytics'
 
 const Container = ({ children, layout, fullWidth, ...customMeta }) => {
   const url = BLOG.path.length ? `${BLOG.link}/${BLOG.path}` : BLOG.link
@@ -56,6 +57,7 @@ const Container = ({ children, layout, fullWidth, ...customMeta }) => {
             <meta property="article:author" content={BLOG.author} />
           </>
         )}
+        <Analytics />
       </Head>
       <div className="wrapper">
         <Header
