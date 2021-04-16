@@ -3,7 +3,7 @@ import Footer from '@/components/Footer'
 import BLOG from '@/blog.config'
 import Head from 'next/head'
 import PropTypes from 'prop-types'
-import BlogPost from './BlogPost'
+// import BlogPost from './BlogPost'
 import Analytics from '@/components/Analytics'
 
 const Container = ({ children, layout, fullWidth, ...customMeta }) => {
@@ -19,7 +19,7 @@ const Container = ({ children, layout, fullWidth, ...customMeta }) => {
         <title>{meta.title}</title>
         <meta content={BLOG.darkBackground} name="theme-color" />
         <meta name="robots" content="follow, index" />
-        <meta charset="UTF-8" />
+        <meta charSet="UTF-8" />
         {BLOG.seo.googleSiteVerification && (
           <meta
             name="google-site-verification"
@@ -59,13 +59,17 @@ const Container = ({ children, layout, fullWidth, ...customMeta }) => {
         )}
         <Analytics />
       </Head>
-      <div className="wrapper">
+      <div
+        className={`wrapper ${
+          BLOG.font === 'serif' ? 'font-serif' : 'font-sans'
+        }`}
+      >
         <Header
           navBarTitle={layout === 'blog' ? meta.title : null}
           fullWidth={fullWidth}
         />
         <main
-          className={`m-auto font-sans flex-grow w-full transition-all ${
+          className={`m-auto flex-grow w-full transition-all ${
             !fullWidth ? 'max-w-2xl px-4' : 'px-4 md:px-24'
           }`}
         >

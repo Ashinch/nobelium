@@ -2,6 +2,7 @@ import DefaultLayout from '@/layouts/default'
 import FullWidthLayout from '@/layouts/fullwidth'
 import { getAllPosts, getSubPost, getPostBlocks } from '@/lib/notion'
 import BLOG from '@/blog.config'
+import Head from 'next/head'
 
 const BlogPost = ({ post, blockMap }) => {
   if (!post) return null

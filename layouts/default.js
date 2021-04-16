@@ -35,7 +35,7 @@ const DefaultLayout = ({ children, blockMap, frontMatter }) => {
             {'← ' + frontMatter.parent.title}
           </a>
         )}
-        <h1 className="font-sans font-bold text-3xl text-black dark:text-white">
+        <h1 className="font-bold text-3xl text-black dark:text-white">
           {frontMatter.title}
         </h1>
         {frontMatter.type !== 'Page' && (
