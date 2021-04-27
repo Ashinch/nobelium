@@ -7,6 +7,7 @@ import formatDate from '@/lib/formatDate'
 import dynamic from 'next/dynamic'
 import 'gitalk/dist/gitalk.css'
 import { useLocale } from '@/lib/locale'
+import { useEffect, useState } from 'react'
 
 const GitalkComponent = dynamic(
   () => {
@@ -18,6 +19,18 @@ const GitalkComponent = dynamic(
 const DefaultLayout = ({ children, blockMap, frontMatter }) => {
   const locale = useLocale()
   const router = useRouter()
+  console.log(blockMap)
+  const [toc, setToc] = useState([])
+  useEffect(() => {
+    const { block } = blockMap
+    const tocArr = []
+    for (const key in block) {
+      if (block[key]?.value?.type === 'sub_sub_header' || block[key]?.value?.type === 'sub_header') {
+        tocArr.push(block[key]?.value?.properties?.title?.join())
+      }
+    }
+    setToc(tocArr)
+  })
   return (
     <Container
       layout="blog"
@@ -27,6 +40,15 @@ const DefaultLayout = ({ children, blockMap, frontMatter }) => {
       type="article"
     >
       <article>
+        <div className='hidden xl:flex flex-col fixed p-2' style={{width: 220, right: 50, top: 280}}>
+          {toc.map((item, index) => {
+            return (
+              <a className='truncate mb-2 text-gray-500 hover:bg-blue-100'>
+                {item}
+              </a>
+            )
+          })}
+        </div>
         {frontMatter.parent && (
           <a className="font-sans font-bold font-medium dark:text-gray-400"
              style={{fontSize: 16, marginBottom: 5, color: '#666666'}}
