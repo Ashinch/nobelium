@@ -2,7 +2,7 @@ const BLOG = {
   title: 'Ash\'s Knowledge Base',
   author: 'Ashinch',
   email: 'Glaxyinfinite@outlook.com',
-  link: 'https://ashinch.vercel.app',
+  link: 'http://ashinch.com',
   description: '',
   lang: 'zh-CN',
   appearance: 'auto', // ['light', 'dark', 'auto'],
