@@ -1,3 +1,13 @@
+# This repo is custom version, for personal blog sites.
+
+- Modified style
+
+- Add go to sub-page function
+
+blog link: www.ashinch.com
+
+The following is the original README.md .
+
 # Nobelium   
 A static blog build on top of Notion and Nextjs, deployed on Vercel.
 
